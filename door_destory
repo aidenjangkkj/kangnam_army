@@ -1,0 +1,24 @@
+-- 현재 스크립트가 위치한 파트를 변수에 저장합니다.
+local part = script.Parent
+
+-- 게임의 작업 공간에서 "secretpart1", "secretpart2", "secretpart3" 객체를 찾습니다.
+local secretPart1 = game.Workspace:FindFirstChild("secretpart1")
+local secretPart2 = game.Workspace:FindFirstChild("secretpart2")
+local secretPart3 = game.Workspace:FindFirstChild("secretpart3")
+
+-- 파트가 터치되었을 때 실행되는 함수입니다.
+local function onPartTouched(otherPart)
+	-- 터치한 객체의 부모를 캐릭터로 설정합니다.
+	local character = otherPart.Parent
+	
+	-- 캐릭터가 존재하고, 캐릭터 안에 Humanoid 객체가 있는지 확인합니다.
+	if character and character:FindFirstChild("Humanoid") then
+		-- secretPart1, secretPart2, secretPart3 객체를 제거합니다.
+		secretPart1:Destroy()
+		secretPart2:Destroy()
+		secretPart3:Destroy()
+	end
+end
+
+-- 파트가 터치되었을 때 onPartTouched 함수를 연결합니다.
+part.Touched:Connect(onPartTouched)
